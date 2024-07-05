@@ -1,0 +1,7 @@
+.genre-wrapper {
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    margin-left: 20px;
+
+}
