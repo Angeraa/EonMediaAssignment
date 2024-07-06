@@ -7,6 +7,7 @@ const SearchBar = ({setToPlay}) => {
   const [SearchIn, setSearchIn] = useState("");
   const [searchedIds, setSearchedIds] = useState([]);
 
+  // fetches thumbnail ids from the server
   const fetchData = async () => {
     console.log("Fetching data: " + SearchIn);
     if (SearchIn === "") {

@@ -18,6 +18,7 @@ const Home = () => {
     }]
   });
 
+  // sets the options for the video player
   useEffect(() => {
     setOptions({
       ...options,
@@ -28,6 +29,7 @@ const Home = () => {
     });
   }, [toPlay])
 
+  // handles the player ready event
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 

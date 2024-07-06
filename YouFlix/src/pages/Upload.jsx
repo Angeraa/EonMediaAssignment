@@ -19,6 +19,7 @@ const Upload = () => {
     }]
   }); 
 
+  // handles the player ready event
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 
@@ -31,6 +32,7 @@ const Upload = () => {
     });
   };
 
+  // handles the video file change
   const handleVideoFileChange = (e) => {
     console.log("File added: ", e.target.files[0]);
     setFile(e.target.files[0]);
@@ -44,11 +46,13 @@ const Upload = () => {
     });
   }; 
 
+  // handles the thumbnail change
   const handleThumbnailChange = (e) => {
     console.log("Thumbnail added: ", e.target.files[0]);
     setThumbnail(e.target.files[0]);
   };
 
+  // handles the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file || !thumbnail || !genre) {

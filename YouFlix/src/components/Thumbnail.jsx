@@ -7,34 +7,40 @@ const Thumbnail = React.memo(({id, setToPlay}) => {
     const [title, setTitle] = useState('');
     const [thumbnail, setThumbnail] = useState('');
 
+    // fetches the thumbnail for the video
+    const fetchThumbnail = async () => {
+        console.log("Fetching thumbnail for id: ", id)
+        const res = await fetch(`http://localhost:4000/videos/getThumbnail/${id}`, { method: 'GET' });
+        if (!res.ok) {
+            console.log("Failed to fetch thumbnail");
+            return;
+        }
+        const data = await res.blob();
+        const url = URL.createObjectURL(data);
+        setThumbnail(url);
+    }
+
+    // fetches the video info for the video
+    const fetchVideoInfo = async () => {
+        const res = await fetch(`http://localhost:4000/videos/getVideoInfo/${id}`, { method: 'GET' });
+        if (!res.ok) {
+            console.log("Failed to fetch video info");
+            console.log(res.status)
+            return;
+        }
+        const data = await res.json();
+        console.log("Fetched video info: ", data);
+        setVideoId(data.videoId);
+        setTitle(data.videoName);
+    }
+
+    // fetches the thumbnail and video info on component mount
     useEffect(() => {
-        const fetchThumbnail = async () => {
-            console.log("Fetching thumbnail for id: ", id)
-            const res = await fetch(`http://localhost:4000/videos/getThumbnail/${id}`, { method: 'GET' });
-            if (!res.ok) {
-                console.log("Failed to fetch thumbnail");
-                return;
-            }
-            const data = await res.blob();
-            const url = URL.createObjectURL(data);
-            setThumbnail(url);
-        }
-        const fetchVideoInfo = async () => {
-            const res = await fetch(`http://localhost:4000/videos/getVideoInfo/${id}`, { method: 'GET' });
-            if (!res.ok) {
-                console.log("Failed to fetch video info");
-                console.log(res.status)
-                return;
-            }
-            const data = await res.json();
-            console.log("Fetched video info: ", data);
-            setVideoId(data.videoId);
-            setTitle(data.videoName);
-        }
         fetchThumbnail();
         fetchVideoInfo();
     }, [])
 
+    // handles the click on the thumbnail
     const handleClick = () => {
         console.log("Clicked on thumbnail: ", videoId);
         setToPlay(videoId);
