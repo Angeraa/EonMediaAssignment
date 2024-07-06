@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import './Upload.css';
 import videojs from 'video.js';
 import VideoJS from '../components/VideoJS.jsx';
@@ -63,7 +63,7 @@ const Upload = () => {
     formData.append('video', file);
     formData.append('thumbnail', thumbnail);
 
-    const res = await fetch('http://localhost:4000/videos/upload/' + genre, {
+    const res = await fetch(`http://localhost:4000/videos/upload/${genre}`, {
       method: 'POST',
       body: formData
     });

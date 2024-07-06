@@ -14,7 +14,7 @@ const SearchBar = ({setToPlay}) => {
       setSearchedIds([]);
       return;
     }
-    const response = await fetch("http://localhost:4000/videos/searchThumbnails/" + SearchIn, {
+    const response = await fetch(`http://localhost:4000/videos/searchThumbnails/${SearchIn}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
